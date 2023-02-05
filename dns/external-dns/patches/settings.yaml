@@ -1,0 +1,32 @@
+---
+- op: add
+  path: "/spec/patches/-"
+  value:
+    target:
+      kind: HelmRelease
+      name: external-dns
+    patch: |-
+      apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      metadata:
+        name: external-dns
+        namespace: external-dns
+      spec:
+        releaseName: external-dns
+        chart:
+          spec:
+            chart: external-dns
+            sourceRef:
+              kind: HelmRepository
+              name: bitnami
+              namespace: external-dns
+        values:
+          provider: azure
+          azure:
+            resourceGroup: "******"
+            tenantId: "******"
+            subscriptionId: "*******"
+            useManagedIdentityExtension: true
+          domainFilters:
+            -  "<YOUR-DOMAIN>"
+          txtOwnerId: external-dns

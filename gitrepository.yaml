@@ -1,0 +1,12 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: GitRepository
+metadata:
+  name: kubernetes-service-catalog
+  namespace: flux-system
+spec:
+  interval: 2m0s
+  ref:
+    branch: main
+  timeout: 60s
+  url: https://github.com/la-cc/kubernetes-service-catalog.git
+  gitImplementation: libgit2
